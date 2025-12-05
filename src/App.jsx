@@ -260,7 +260,7 @@ function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1, duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-wrap justify-center gap-6"
           >
             <a
               href="https://twitter.com/your-twitter-handle"
@@ -269,12 +269,21 @@ function HeroSection() {
               className="group"
             >
               <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.1, y: -8 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 bg-cemetery-green/60 border-2 border-neon-green/50 rounded-lg px-6 py-3 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+                className="relative flex items-center gap-4 bg-gradient-to-r from-cemetery-green/80 to-cemetery-green/60 border-2 border-neon-green/60 rounded-2xl px-8 py-4 box-glow-hover transition-all duration-300 backdrop-blur-md shadow-2xl overflow-hidden"
               >
-                <FaTwitter className="w-6 h-6 text-[#1DA1F2]" />
-                <span className="text-neon-green font-bold">Follow Us</span>
+                {/* Animated background glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-green/0 via-neon-green/10 to-neon-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* Circular logo */}
+                <div className="relative w-12 h-12 rounded-full bg-white/10 p-2 border-2 border-neon-green/40 group-hover:border-neon-green shadow-lg">
+                  <img src="/image/xlogo.png" alt="X/Twitter" className="w-full h-full object-contain rounded-full" />
+                </div>
+
+                <span className="relative text-neon-green font-bold text-lg group-hover:text-glow transition-all duration-300">
+                  Follow Us
+                </span>
               </motion.div>
             </a>
 
@@ -285,12 +294,21 @@ function HeroSection() {
               className="group"
             >
               <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.1, y: -8 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 bg-cemetery-green/60 border-2 border-neon-green/50 rounded-lg px-6 py-3 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+                className="relative flex items-center gap-4 bg-gradient-to-r from-cemetery-green/80 to-cemetery-green/60 border-2 border-neon-green/60 rounded-2xl px-8 py-4 box-glow-hover transition-all duration-300 backdrop-blur-md shadow-2xl overflow-hidden"
               >
-                <img src="/image/Pump-Fun-Logo.png" alt="Pump.fun" className="w-6 h-6" />
-                <span className="text-neon-green font-bold">Buy on Pump.fun</span>
+                {/* Animated background glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-green/0 via-neon-green/10 to-neon-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* Circular logo */}
+                <div className="relative w-12 h-12 rounded-full bg-white/10 p-2 border-2 border-neon-green/40 group-hover:border-neon-green shadow-lg">
+                  <img src="/image/Pump-Fun-Logo.png" alt="Pump.fun" className="w-full h-full object-contain rounded-full" />
+                </div>
+
+                <span className="relative text-neon-green font-bold text-lg group-hover:text-glow transition-all duration-300">
+                  Buy on Pump.fun
+                </span>
               </motion.div>
             </a>
 
@@ -301,12 +319,21 @@ function HeroSection() {
               className="group"
             >
               <motion.div
-                whileHover={{ scale: 1.05, y: -5 }}
+                whileHover={{ scale: 1.1, y: -8 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-3 bg-cemetery-green/60 border-2 border-neon-green/50 rounded-lg px-6 py-3 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+                className="relative flex items-center gap-4 bg-gradient-to-r from-cemetery-green/80 to-cemetery-green/60 border-2 border-neon-green/60 rounded-2xl px-8 py-4 box-glow-hover transition-all duration-300 backdrop-blur-md shadow-2xl overflow-hidden"
               >
-                <img src="/image/dex.png" alt="DEXScreener" className="w-6 h-6" />
-                <span className="text-neon-green font-bold">View Chart</span>
+                {/* Animated background glow */}
+                <div className="absolute inset-0 bg-gradient-to-r from-neon-green/0 via-neon-green/10 to-neon-green/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* Circular logo */}
+                <div className="relative w-12 h-12 rounded-full bg-white/10 p-2 border-2 border-neon-green/40 group-hover:border-neon-green shadow-lg">
+                  <img src="/image/dex.png" alt="DEXScreener" className="w-full h-full object-contain rounded-full" />
+                </div>
+
+                <span className="relative text-neon-green font-bold text-lg group-hover:text-glow transition-all duration-300">
+                  View Chart
+                </span>
               </motion.div>
             </a>
           </motion.div>
