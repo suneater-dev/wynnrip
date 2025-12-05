@@ -54,13 +54,18 @@ function FogOverlay() {
 
 // Background Music Component
 function BackgroundMusic() {
-  const [isPlaying, setIsPlaying] = useState(false)
+  const [isPlaying, setIsPlaying] = useState(true)
   const [isMuted, setIsMuted] = useState(true)
   const audioRef = useRef(null)
 
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.volume = 0.3 // Set volume to 30%
+      // Autoplay (muted initially due to browser restrictions)
+      audioRef.current.play().catch(err => {
+        console.log('Autoplay prevented:', err)
+        setIsPlaying(false)
+      })
     }
   }, [])
 
@@ -70,7 +75,6 @@ function BackgroundMusic() {
         audioRef.current.pause()
       } else {
         audioRef.current.play()
-        setIsMuted(false)
       }
       setIsPlaying(!isPlaying)
     }
@@ -89,6 +93,7 @@ function BackgroundMusic() {
       <audio
         ref={audioRef}
         loop
+        autoPlay
         muted={isMuted}
         src="/audio/sad-violin.mp3"
       />
