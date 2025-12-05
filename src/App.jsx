@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
-import { FaTwitter, FaChartLine, FaCoins } from 'react-icons/fa'
+import { useRef, useState, useEffect } from 'react'
+import { FaTwitter, FaChartLine, FaCoins, FaVolumeUp, FaVolumeMute } from 'react-icons/fa'
 
 function App() {
   return (
@@ -10,6 +10,9 @@ function App() {
 
       {/* Particle System */}
       <ParticleSystem />
+
+      {/* Background Music Player */}
+      <BackgroundMusic />
 
       {/* Main Content */}
       <div className="relative z-10">
@@ -43,6 +46,92 @@ function FogOverlay() {
           </defs>
           <rect width="100%" height="100%" filter="url(#fog)" />
         </svg>
+      </div>
+    </>
+  )
+}
+
+// Background Music Component
+function BackgroundMusic() {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [isMuted, setIsMuted] = useState(true)
+  const audioRef = useRef(null)
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = 0.3 // Set volume to 30%
+    }
+  }, [])
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause()
+      } else {
+        audioRef.current.play()
+        setIsMuted(false)
+      }
+      setIsPlaying(!isPlaying)
+    }
+  }
+
+  const toggleMute = () => {
+    if (audioRef.current) {
+      audioRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
+    }
+  }
+
+  return (
+    <>
+      {/* Audio element - Add your cemetery music file to public/audio/ */}
+      <audio
+        ref={audioRef}
+        loop
+        muted={isMuted}
+        src="/audio/cemetery-music.mp3"
+      />
+
+      {/* Music Control Button - Fixed position */}
+      <div className="fixed bottom-8 right-8 z-50 flex gap-3">
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={togglePlay}
+          className="bg-cemetery-green/60 border-2 border-neon-green/50 rounded-full p-4 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+          title={isPlaying ? "Pause Music" : "Play Music"}
+        >
+          {isPlaying ? (
+            <div className="w-6 h-6 flex items-center justify-center">
+              <div className="flex gap-1">
+                <div className="w-1.5 h-5 bg-neon-green rounded"></div>
+                <div className="w-1.5 h-5 bg-neon-green rounded"></div>
+              </div>
+            </div>
+          ) : (
+            <div className="w-6 h-6 flex items-center justify-center">
+              <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-neon-green border-b-[10px] border-b-transparent ml-1"></div>
+            </div>
+          )}
+        </motion.button>
+
+        {isPlaying && (
+          <motion.button
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={toggleMute}
+            className="bg-cemetery-green/60 border-2 border-neon-green/50 rounded-full p-4 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+            title={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? (
+              <FaVolumeMute className="w-6 h-6 text-neon-green" />
+            ) : (
+              <FaVolumeUp className="w-6 h-6 text-neon-green" />
+            )}
+          </motion.button>
+        )}
       </div>
     </>
   )
@@ -129,9 +218,92 @@ function HeroSection() {
           <h1 className="text-6xl md:text-8xl font-tombstone text-neon-green text-glow mb-4">
             $WYNNRIP
           </h1>
-          <p className="text-xl md:text-2xl text-neon-green/70 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-neon-green/70 max-w-2xl mx-auto mb-8">
             A memorial to all the traders who got rekt by the Bitcoin bull run
           </p>
+
+          {/* Contract Address */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="mb-8"
+          >
+            <div className="inline-block bg-cemetery-green/40 border-2 border-neon-green/30 rounded-lg px-6 py-3 box-glow backdrop-blur-sm">
+              <p className="text-xs text-neon-green/60 mb-1">Contract Address</p>
+              <div className="flex items-center gap-2">
+                <code className="text-sm md:text-base text-neon-green font-mono">
+                  HKgURuhanXGVZwUG6tExHbVoweymUuWgkhs6UEPhpump
+                </code>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText('HKgURuhanXGVZwUG6tExHbVoweymUuWgkhs6UEPhpump')
+                    alert('Contract address copied!')
+                  }}
+                  className="text-neon-green hover:text-neon-green/70 transition-colors"
+                  title="Copy to clipboard"
+                >
+                  📋
+                </button>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1, duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <a
+              href="https://twitter.com/your-twitter-handle"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 bg-cemetery-green/60 border-2 border-neon-green/50 rounded-lg px-6 py-3 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+              >
+                <FaTwitter className="w-6 h-6 text-[#1DA1F2]" />
+                <span className="text-neon-green font-bold">Follow Us</span>
+              </motion.div>
+            </a>
+
+            <a
+              href="https://pump.fun/coin/HKgURuhanXGVZwUG6tExHbVoweymUuWgkhs6UEPhpump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 bg-cemetery-green/60 border-2 border-neon-green/50 rounded-lg px-6 py-3 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+              >
+                <img src="/image/Pump-Fun-Logo.png" alt="Pump.fun" className="w-6 h-6" />
+                <span className="text-neon-green font-bold">Buy on Pump.fun</span>
+              </motion.div>
+            </a>
+
+            <a
+              href="https://dexscreener.com/solana/HKgURuhanXGVZwUG6tExHbVoweymUuWgkhs6UEPhpump"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-3 bg-cemetery-green/60 border-2 border-neon-green/50 rounded-lg px-6 py-3 box-glow-hover transition-all duration-300 backdrop-blur-sm"
+              >
+                <img src="/image/dex.png" alt="DEXScreener" className="w-6 h-6" />
+                <span className="text-neon-green font-bold">View Chart</span>
+              </motion.div>
+            </a>
+          </motion.div>
         </motion.div>
 
         {/* Grass at bottom */}
