@@ -18,6 +18,7 @@ function App() {
       <div className="relative z-10">
         <HeroSection />
         <AboutSection />
+        <LiveChartSection />
         <TokenomicsSection />
         <HowToBuySection />
         <Footer />
@@ -344,6 +345,50 @@ function AboutSection() {
               This token stands as a memorial to James and all the brave (or foolish) traders
               who dared to fight the bull. May their portfolios rest in peace.
             </p>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+// Live Chart Section
+function LiveChartSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  return (
+    <section ref={ref} className="relative py-20 px-4">
+      <div className="max-w-6xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-5xl md:text-6xl font-tombstone text-neon-green text-glow text-center mb-12">
+            LIVE CHART
+          </h2>
+
+          <div className="bg-cemetery-green/40 border-2 border-neon-green/30 rounded-lg p-4 box-glow backdrop-blur-sm overflow-hidden">
+            <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+              <iframe
+                src="https://dexscreener.com/solana/hpbnge7i2s5mxwefxzzrdub3jk9lrkwaztm1kzhegipr?embed=1&theme=dark&trades=0&info=0"
+                className="absolute top-0 left-0 w-full h-full rounded-lg"
+                style={{ border: 'none' }}
+                title="DEXScreener Chart"
+              />
+            </div>
+          </div>
+
+          <div className="text-center mt-6">
+            <a
+              href="https://dexscreener.com/solana/hpbnge7i2s5mxwefxzzrdub3jk9lrkwaztm1kzhegipr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-neon-green/70 hover:text-neon-green transition-colors duration-300"
+            >
+              View Full Chart on DEXScreener →
+            </a>
           </div>
         </motion.div>
       </div>
