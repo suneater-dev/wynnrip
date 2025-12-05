@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cemetery-dark overflow-x-hidden;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41;
+  }
+
+  .text-glow-strong {
+    text-shadow: 0 0 15px #00ff41, 0 0 30px #00ff41, 0 0 45px #00ff41, 0 0 60px #00ff41;
+  }
+
+  .box-glow {
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3), 0 0 40px rgba(0, 255, 65, 0.2);
+  }
+
+  .box-glow-hover:hover {
+    box-shadow: 0 0 30px rgba(0, 255, 65, 0.5), 0 0 60px rgba(0, 255, 65, 0.3);
+  }
+}
