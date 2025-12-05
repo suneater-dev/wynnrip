@@ -85,12 +85,12 @@ function BackgroundMusic() {
 
   return (
     <>
-      {/* Audio element - Add your cemetery music file to public/audio/ */}
+      {/* Audio element */}
       <audio
         ref={audioRef}
         loop
         muted={isMuted}
-        src="/audio/cemetery-music.mp3"
+        src="/audio/sad-violin.mp3"
       />
 
       {/* Music Control Button - Fixed position */}
